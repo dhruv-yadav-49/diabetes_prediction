@@ -1,125 +1,264 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HealthSphere | Home</title>
+    <title>WellnessSphere | Premium Analytics</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-deep: #0f172a;
+            --accent-primary: #6366f1;
+            --accent-secondary: #14b8a6;
+            --glass-white: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
         body {
-            font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-deep);
+            color: #f8fafc;
             min-height: 100vh;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(20, 184, 166, 0.15) 0%, transparent 40%);
         }
-        .pastel-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+
+        .glass-card {
+            background: var(--glass-white);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .hero-gradient {
-            background: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 100%);
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 12px 48px 0 rgba(99, 102, 241, 0.15);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #a5b4fc 0%, #2dd4bf 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-premium {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-premium::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-premium:hover::after {
+            left: 100%;
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-secondary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
         }
     </style>
 </head>
-<body class="text-gray-700">
 
-    <nav class="sticky top-0 z-50 bg-white/70 backdrop-blur-lg shadow-sm">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <img src="static/logo.jpeg" alt="HealthSphere Logo" class="h-10 w-10 rounded-full shadow-sm">
-                <div class="text-2xl font-bold text-indigo-400 tracking-tight">Health<span class="text-teal-400">Sphere</span></div>
+<body class="selection:bg-indigo-500 selection:text-white">
+
+    <nav class="sticky top-0 z-50 bg-[#0f172a]/80 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-8 py-5 flex justify-between items-center">
+            <div class="flex items-center gap-4 group cursor-pointer">
+                <div class="relative">
+                    <div
+                        class="absolute inset-0 bg-indigo-500 rounded-full blur-md opacity-30 group-hover:opacity-60 transition">
+                    </div>
+                    <img src="static/logo.jpeg" alt="Logo"
+                        class="relative h-12 w-12 rounded-full border border-white/20 shadow-lg">
+                </div>
+                <div class="text-2xl font-bold tracking-tighter">
+                    <span class="text-white">Wellness</span><span class="text-teal-400">Sphere</span>
+                </div>
             </div>
-            <div class="space-x-8 font-semibold">
-                <a href="/" class="text-indigo-500 border-b-2 border-indigo-300 pb-1">Home</a>
-                <a href="/predict" class="text-gray-500 hover:text-indigo-400 transition">Predict</a>
-                <a href="/about" class="text-gray-500 hover:text-indigo-400 transition">About</a>
+            <div class="hidden md:flex space-x-12 text-sm font-semibold tracking-wide uppercase">
+                <a href="/" class="text-teal-400 nav-link">Home</a>
+                <a href="/predict" class="text-gray-400 hover:text-white transition-colors nav-link">Predict</a>
+                <a href="/about" class="text-gray-400 hover:text-white transition-colors nav-link">Science</a>
             </div>
         </div>
     </nav>
 
-    <header class="max-w-6xl mx-auto px-6 pt-16 pb-12 flex flex-col md:flex-row items-center gap-12">
-        <div class="flex-1 text-center md:text-left">
-            <h1 class="text-5xl font-bold text-gray-800 leading-tight mb-6">
-                Your Health, <br><span class="text-indigo-400 font-extrabold text-6xl">Intelligently Decoded.</span>
+    <header class="max-w-7xl mx-auto px-8 py-24 flex flex-col lg:flex-row items-center gap-20">
+        <div class="flex-1 space-y-10 text-center lg:text-left">
+            <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-bold uppercase tracking-widest">
+                <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
+                AI-Powered Diagnostics
+            </div>
+            <h1 class="text-6xl xl:text-8xl font-bold leading-[1.1] tracking-tight">
+                Your Health, <br><span class="text-gradient">Intelligently Decoded.</span>
             </h1>
-            <p class="text-xl text-gray-500 mb-8 max-w-lg">
-                HealthSphere combines clinical data with lifestyle insights to provide the world's most intuitive diabetes risk assessment.
+            <p class="text-xl text-slate-400 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                The world's most sophisticated metabolic risk assessment. By fusing cutting-edge clinical pathology with
+                predictive AI, we turn data into clarity.
             </p>
-            <a href="/predict" class="inline-block bg-gradient-to-r from-teal-300 to-indigo-300 text-white px-10 py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all">
-                Start My Assessment
-            </a>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start pt-4">
+                <a href="/predict"
+                    class="btn-premium px-12 py-5 rounded-2xl font-bold text-lg shadow-2xl shadow-indigo-500/20 hover:scale-105 active:scale-95 transition-all text-white">
+                    Begin Assessment
+                </a>
+                <a href="/about"
+                    class="px-12 py-5 rounded-2xl font-bold text-lg border border-white/10 bg-white/5 hover:bg-white/10 transition-all">
+                    How it Works
+                </a>
+            </div>
         </div>
-        <div class="flex-1">
-            <img src="static/diabetes.jpeg" alt="Glucose Monitoring" class="rounded-[2rem] shadow-2xl border-8 border-white">
+        <div class="flex-1 relative">
+            <div
+                class="absolute -inset-4 bg-gradient-to-tr from-indigo-500/20 to-teal-500/20 rounded-[3rem] blur-3xl opacity-50">
+            </div>
+            <img src="static/diabetes.jpeg" alt="Dashboard Preview"
+                class="relative rounded-[3rem] shadow-2xl border border-white/10 floating">
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-6 py-12 space-y-24">
+    <main class="max-w-7xl mx-auto px-8 py-20 pb-40">
 
-        <section class="flex flex-col md:flex-row-reverse items-center gap-16">
-            <div class="flex-1">
-                <h2 class="text-3xl font-bold text-teal-500 mb-6 flex items-center gap-3">
-                    <span class="p-3 bg-teal-100 rounded-2xl">01</span>
-                    Precise Clinical Monitoring
-                </h2>
-                <div class="pastel-card p-8 rounded-3xl space-y-4">
-                    <p class="text-lg leading-relaxed">
-                        Regular glucose monitoring is the cornerstone of effective health management. By tracking your <strong>98 mg/dL</strong> levels, HealthSphere identifies patterns before they become problems.
+        <div class="text-center mb-32">
+            <h2 class="text-gray-500 uppercase tracking-[0.3em] font-bold text-xs mb-4">Core Capabilities</h2>
+            <div class="text-4xl md:text-5xl font-bold">Unparalleled Insights</div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+
+            <div class="glass-card p-12 rounded-[2.5rem] relative overflow-hidden group">
+                <div
+                    class="absolute top-0 right-0 p-8 text-7xl font-bold text-white/5 group-hover:text-teal-400/10 transition-colors">
+                    01</div>
+                <div class="space-y-8">
+                    <div
+                        class="h-16 w-16 bg-teal-500/10 rounded-2xl flex items-center justify-center border border-teal-500/20">
+                        <svg class="h-8 w-8 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-3xl font-bold">Clinical Precision</h3>
+                    <p class="text-slate-400 leading-relaxed text-lg">
+                        WellnessSphere mirrors professional clinical environments. By tracking markers like
+                        <strong>HbA1c</strong> and <strong>Fasting Glucose</strong>, we catch metabolic shifts before
+                        they become risks.
                     </p>
-                    <ul class="space-y-3">
-                        <li class="flex items-center gap-2 text-sm font-semibold text-gray-600">
-                            <div class="w-2 h-2 bg-teal-300 rounded-full"></div> Fasting & Postprandial tracking
+                    <ul class="space-y-4 pt-4">
+                        <li class="flex items-center gap-4 text-slate-300">
+                            <div class="h-1.5 w-1.5 rounded-full bg-teal-400"></div>
+                            <span class="font-medium">Real-time biomarker synthesis</span>
                         </li>
-                        <li class="flex items-center gap-2 text-sm font-semibold text-gray-600">
-                            <div class="w-2 h-2 bg-teal-300 rounded-full"></div> Real-time biomarker analysis
+                        <li class="flex items-center gap-4 text-slate-300">
+                            <div class="h-1.5 w-1.5 rounded-full bg-teal-400"></div>
+                            <span class="font-medium">Clinical pathology standards</span>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="flex-1">
-                <img src="static/img1.jpg" alt="Diabetes Infographic" class="rounded-3xl shadow-xl">
-            </div>
-        </section>
 
-        <section class="flex flex-col md:flex-row items-center gap-16">
-            <div class="flex-1">
-                <h2 class="text-3xl font-bold text-indigo-400 mb-6 flex items-center gap-3">
-                    <span class="p-3 bg-indigo-100 rounded-2xl">02</span>
-                    The Holistic Diet Matrix
-                </h2>
-                <div class="pastel-card p-8 rounded-3xl space-y-4">
-                    <p class="text-lg leading-relaxed">
-                        Nutrition is our primary medicine. Our "Diet Score" calculates the synergy between antioxidants in fruits like <strong>apples and oranges</strong> and the fibers in <strong>broccoli</strong> to stabilize your glycemic response.
+            <div class="glass-card p-12 rounded-[2.5rem] relative overflow-hidden group">
+                <div
+                    class="absolute top-0 right-0 p-8 text-7xl font-bold text-white/5 group-hover:text-indigo-400/10 transition-colors">
+                    02</div>
+                <div class="space-y-8">
+                    <div
+                        class="h-16 w-16 bg-indigo-500/10 rounded-2xl flex items-center justify-center border border-indigo-500/20">
+                        <svg class="h-8 w-8 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-3xl font-bold">Holistic Diet Matrix</h3>
+                    <p class="text-slate-400 leading-relaxed text-lg">
+                        Nutrition is data. Our matrix analyzes the synergy between high-fiber inputs like
+                        <strong>broccoli</strong> and antioxidants to stabilize your glycemic response profile.
                     </p>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-white p-4 rounded-xl text-center border border-indigo-50">
-                            <span class="block text-2xl font-bold text-indigo-300">Fiber</span>
-                            <span class="text-xs uppercase text-gray-400">Regulation</span>
+                    <div class="grid grid-cols-2 gap-6 pt-6">
+                        <div class="p-6 rounded-2xl bg-white/5 border border-white/5 text-center">
+                            <div class="text-2xl font-bold text-indigo-300">Glycemic</div>
+                            <div class="text-[10px] uppercase tracking-widest text-slate-500 mt-1 font-bold">Control
+                            </div>
                         </div>
-                        <div class="bg-white p-4 rounded-xl text-center border border-indigo-50">
-                            <span class="block text-2xl font-bold text-indigo-300">Nutrients</span>
-                            <span class="text-xs uppercase text-gray-400">Vitality</span>
+                        <div class="p-6 rounded-2xl bg-white/5 border border-white/5 text-center">
+                            <div class="text-2xl font-bold text-indigo-300">Nutrients</div>
+                            <div class="text-[10px] uppercase tracking-widest text-slate-500 mt-1 font-bold">Absorption
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="flex-1">
-                <img src="static/images2.jpeg" alt="Healthy Nutrition" class="rounded-3xl shadow-xl">
-            </div>
-        </section>
 
+        </div>
     </main>
 
-    <footer class="bg-white/50 py-12 mt-12">
-        <div class="max-w-6xl mx-auto px-6 text-center">
-            <div class="flex items-center justify-center gap-2 mb-4">
-                <img src="static/logo.jpeg" alt="HealthSphere Logo" class="h-6 w-6 rounded-full grayscale">
-                <span class="text-lg font-bold text-gray-400">HealthSphere</span>
+    <footer class="border-t border-white/5 py-20 bg-[#0c1221]">
+        <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-10">
+            <div class="flex items-center gap-3 opacity-50">
+                <img src="static/logo.jpeg" alt="Logo" class="h-8 w-8 rounded-full grayscale">
+                <div class="text-xl font-bold tracking-tighter">WellnessSphere</div>
             </div>
-            <p class="text-sm text-gray-400 tracking-widest uppercase">Empowering Health through Data Science © 2026</p>
+            <p class="text-xs text-slate-500 tracking-[0.2em] uppercase font-semibold">
+                WellnessSphere: Intelligence for a Healthier Tomorrow © 2026
+            </p>
+            <div class="flex gap-8 text-slate-500 text-xs font-bold uppercase tracking-widest">
+                <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                <a href="#" class="hover:text-white transition-colors">Terms</a>
+            </div>
         </div>
     </footer>
 
 </body>
+
 </html>
